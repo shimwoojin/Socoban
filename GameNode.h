@@ -14,6 +14,7 @@ public:
 	//getter
 	const POINT& getPoint() { return point; }
 	const RECT& getRect() { return rect; }
+	const int& getInterval() { return interval; }
 	//setter
 	void setPoint(POINT point) { this->point = point; }
 	void setRect(RECT rect) { this->rect = rect; }
@@ -21,5 +22,6 @@ public:
 protected:
 	POINT point;
 	RECT rect;
+	int interval;
 };
 

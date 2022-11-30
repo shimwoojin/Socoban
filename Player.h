@@ -4,6 +4,8 @@
 class Player : public GameNode
 {
 public:
+	enum class DIR{ left, right, up, down };
+public:
 	Player();
 	~Player();
 
@@ -11,7 +13,16 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual HBRUSH getBrush() override;
-private:
 
+	void pushBrick(class Brick& brick);
+
+	const DIR& getDir() const { return dir; }
+
+	void moveCancel();
+
+private:
+	void move();
+
+	DIR dir;
 };
 

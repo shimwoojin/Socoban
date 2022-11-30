@@ -14,6 +14,7 @@ void Wall::Init()
 {
 	point = makePoint(0, 0);
 	rect = makeRect(point, 2);
+	interval = 2;
 }
 
 void Wall::Update()
@@ -26,7 +27,6 @@ void Wall::Render()
 	SelectObject(g_hDC, mybrush);
 
 	int left, right, top, bottom;
-	int interval = 4;
 
 	for (int i = 0; i < HEIGHT; i++)
 	{

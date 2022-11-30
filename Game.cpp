@@ -55,19 +55,36 @@ void Game::Init()
 void Game::Update()
 {
 	KeyManager::Get().Update();
+	//if (wall != nullptr) wall->Update();
+	if(player != nullptr) player->Update();
 
-	if (wall != nullptr) wall->Update();
-	if (brick != nullptr){
-		for (int i = 0; i < GOAL; i++){
-			brick[i].Update();
-		}
-	}
-	if (goalpoint != nullptr) {
+	if (goalpoint != nullptr && brick != nullptr) {
 		for (int i = 0; i < GOAL; i++) {
 			goalpoint[i].Update();
+			brick[i].Update();
+			for (int j = 0; j < GOAL; j++)
+			{
+				goalpoint[i].HowManyGoal(brick[j]);
+			}
+		}
+		if (goalpoint[0].isGoalMax())
+		{
+			//game ending..
+			exit(1);
+		}
+		goalpoint[0].setGoalCount(0);
+	}
+
+	if (player != nullptr && brick != nullptr) {
+		bool canMovebrick = true;
+		for (int i = 0; i < GOAL; i++) {
+			for (int j = 0; j < GOAL; j++){
+				if(i != j) canMovebrick &=  brick[i].canBrickMove(brick[j], player);
+			}
+			if (canMovebrick) player->pushBrick(brick[i]);
 		}
 	}
-	if(player != nullptr) player->Update();
+
 }
 
 void Game::Render()
@@ -81,14 +98,14 @@ void Game::Render()
 	drawLine();
 
 	if (wall != nullptr) wall->Render();
-	if (brick != nullptr) {
-		for (int i = 0; i < GOAL; i++) {
-			brick[i].Render();
-		}
-	}
 	if (goalpoint != nullptr) {
 		for (int i = 0; i < GOAL; i++) {
 			goalpoint[i].Render();
+		}
+	}
+	if (brick != nullptr) {
+		for (int i = 0; i < GOAL; i++) {
+			brick[i].Render();
 		}
 	}
 	if (player != nullptr)	player->Render();

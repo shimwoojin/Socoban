@@ -10,7 +10,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 	virtual HBRUSH getBrush() override;
-private:
 
+	bool canBrickMove(Brick& brick, const class Player* player);
+private:
 };
 
