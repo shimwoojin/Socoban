@@ -76,8 +76,8 @@ void Game::Update()
 	}
 
 	if (player != nullptr && brick != nullptr) {
-		bool canMovebrick = true;
 		for (int i = 0; i < GOAL; i++) {
+			bool canMovebrick = true;
 			for (int j = 0; j < GOAL; j++){
 				if(i != j) canMovebrick &=  brick[i].canBrickMove(brick[j], player);
 			}
