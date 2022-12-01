@@ -44,10 +44,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SOCOBAN));
-
-    game = new Game;
-    KeyManager::Get().Init();
-
     MSG msg;
 
     HDC hdc = GetDC(g_hWnd);
@@ -59,17 +55,24 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //백버퍼 DC에 비트맵 연결
     SelectObject(g_hDC, hBitmap);
 
-    // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
+    KeyManager::Get().Init();
 
-    delete game;
+    while(true)
+    {
+        game = new Game;
+
+        // 기본 메시지 루프입니다:
+        while (GetMessage(&msg, nullptr, 0, 0) && !game->getGameEnd() /*& !game->getReStartGame()*/)
+        {
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+
+        delete game;
+    }
 
     return (int) msg.wParam;
 }

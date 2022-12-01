@@ -36,6 +36,9 @@ Game::~Game()
 
 void Game::Init()
 {
+	gameEnd = false;
+	reStartGame = false;
+
 	player = new Player;
 	wall = new Wall;
 	brick = new Brick[GOAL]
@@ -69,8 +72,7 @@ void Game::Update()
 		}
 		if (goalpoint[0].isGoalMax())
 		{
-			//game ending..
-			exit(1);
+			gameEnd = true;
 		}
 		goalpoint[0].setGoalCount(0);
 	}
@@ -85,10 +87,13 @@ void Game::Update()
 		}
 	}
 
+	//if (player != nullptr && brick != nullptr)
 	for (int i = 0; i < GOAL; i++)
 	{
 		player->moveCancel(brick[i]);
 	}
+
+	//reGame();
 
 }
 
@@ -119,3 +124,11 @@ void Game::Render()
 
 	EndPaint(g_hWnd, &ps);
 }
+
+//void Game::reGame()
+//{
+//	if (KeyManager::Get().IsDown('r') || KeyManager::Get().IsDown('R'))
+//	{
+//		reStartGame = true;
+//	}
+//}
