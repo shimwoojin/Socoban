@@ -85,6 +85,11 @@ void Game::Update()
 		}
 	}
 
+	for (int i = 0; i < GOAL; i++)
+	{
+		player->moveCancel(brick[i]);
+	}
+
 }
 
 void Game::Render()

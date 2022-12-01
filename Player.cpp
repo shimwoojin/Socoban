@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Wall.h"
-#include "brick.h"
+#include "Brick.h"
+#include "GameNode.h"
 
 Player::Player()
 {
@@ -91,36 +92,40 @@ void Player::pushBrick(Brick& brick)
 	brick.setRect(brickRect);
 }
 
-void Player::moveCancel()
+void Player::moveCancel(Brick& brick)
 {
-	switch (dir)
+	RECT rt;
+	if (IntersectRect(&rt, &rect, &brick.getRect()))
 	{
-	case Player::DIR::left:
-	{
-		point.x += INTERVAL;
-		rect = makeRect(point, interval);
-	}
+		switch (dir)
+		{
+		case Player::DIR::left:
+		{
+			point.x += INTERVAL;
+				rect = makeRect(point, interval);
+		}
 		break;
-	case Player::DIR::right:
-	{
-		point.x -= INTERVAL;
-		rect = makeRect(point, interval);
-	}
+		case Player::DIR::right:
+		{
+			point.x -= INTERVAL;
+			rect = makeRect(point, interval);
+		}
 		break;
-	case Player::DIR::up:
-	{
-		point.y += INTERVAL;
-		rect = makeRect(point, interval);
-	}
+		case Player::DIR::up:
+		{
+			point.y += INTERVAL;
+			rect = makeRect(point, interval);
+		}
 		break;
-	case Player::DIR::down:
-	{
-		point.y -= INTERVAL;
-		rect = makeRect(point, interval);
-	}
+		case Player::DIR::down:
+		{
+			point.y -= INTERVAL;
+			rect = makeRect(point, interval);
+		}
 		break;
-	default:
-		break;
+		default:
+			break;
+		}
 	}
 }
 

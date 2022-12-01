@@ -18,7 +18,7 @@ public:
 
 	const DIR& getDir() const { return dir; }
 
-	void moveCancel();
+	void moveCancel(class Brick& brick);
 
 private:
 	void move();
