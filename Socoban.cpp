@@ -62,7 +62,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         game = new Game;
 
         // 기본 메시지 루프입니다:
-        while (GetMessage(&msg, nullptr, 0, 0) && !game->getGameEnd() /*& !game->getReStartGame()*/)
+        while (GetMessage(&msg, nullptr, 0, 0) && !game->getGameEnd() && !game->getReStartGame())
         {
             if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
             {

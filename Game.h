@@ -15,7 +15,7 @@ public:
 
 	bool getReStartGame() const { return reStartGame; }
 	void setReStartGame(bool state) { reStartGame = state; }
-	//void reGame();
+	void reGame();
 
 private:
 	class Player* player;

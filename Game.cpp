@@ -60,6 +60,7 @@ void Game::Update()
 	KeyManager::Get().Update();
 	//if (wall != nullptr) wall->Update();
 	if(player != nullptr) player->Update();
+	reGame();
 
 	if (goalpoint != nullptr && brick != nullptr) {
 		for (int i = 0; i < GOAL; i++) {
@@ -87,13 +88,11 @@ void Game::Update()
 		}
 	}
 
-	//if (player != nullptr && brick != nullptr)
+	if (player != nullptr && brick != nullptr)
 	for (int i = 0; i < GOAL; i++)
 	{
 		player->moveCancel(brick[i]);
 	}
-
-	//reGame();
 
 }
 
@@ -125,10 +124,10 @@ void Game::Render()
 	EndPaint(g_hWnd, &ps);
 }
 
-//void Game::reGame()
-//{
-//	if (KeyManager::Get().IsDown('r') || KeyManager::Get().IsDown('R'))
-//	{
-//		reStartGame = true;
-//	}
-//}
+void Game::reGame()
+{
+	if (KeyManager::Get().IsDown('r') || KeyManager::Get().IsDown('R'))
+	{
+		reStartGame = true;
+	}
+}
